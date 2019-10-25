@@ -1,13 +1,13 @@
 <template>
 <v-app>
   <div id="head">
-    <MainHeader />
+    <Header/>
   </div>
-  <v-content>
+  <v-content class="content">
     <router-view />
   </v-content>
-  <div id="foot">
-    <MainFooter />
+  <div id="footer">
+    <Footer />
   </div>
 </v-app>
 </template>
@@ -34,19 +34,19 @@
   background-color: #FF7F50;
   font-weight: bold;
 }
+
+
 </style>
 
 <script>
-import store from './store'
-import MainHeader from './components/MainHeader'
-import MainFooter from './components/MainFooter'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
 export default {
   name: 'App',
-  store,
   components: {
-    MainHeader,
-    MainFooter
+    Header,
+    Footer
   },
   data() {
     return {

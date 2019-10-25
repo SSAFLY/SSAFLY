@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HomePage from './views/HomePage.vue'
+import TestPage from './views/TestPage.vue'
+import WorkbookPage from './views/WorkbookPage.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -15,6 +17,16 @@ export default new Router({
 			path: '/',
 			name: 'home',
 			component: HomePage
-		}
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: TestPage
+    },
+    {
+      path: '/workbook',
+      name: 'workbook',
+      component: WorkbookPage
+    }
   ]
 })
