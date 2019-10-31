@@ -32,6 +32,8 @@
 </template>
 <script>
 import LoginDialog from "@/components/LoginDialog";
+import { mapActions, mapState } from "vuex";
+
 export default {
 name: 'Header',
 components: {
@@ -42,17 +44,25 @@ props: {
     type: String
   }
 },
+computed: {
+  ...mapState(["user"])
+},
 methods: {
   scrollToTop() {
     window.scrollTo(0, 0);
   },
   parents(dialog) {
     this.dialog = dialog;
+  },
+  signOut() {
+    alert("로그아웃 되었습니다");
+    this.$store.commit("setUser", null);
+    this.$store.commit("setLogin", false);
+    this.$store.commit("loginSuccess", false);
   }
 },
 data() {
   return {
-    user: null,
     dialog: false
   }
 }

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- xml mapper와 짝이 될 java mapper의 패키지명(경로명)과 파일명을 적어줌 -->
+<mapper namespace="com.ssafy.mapper.MemberMapper">
+
+
+  
+  	<!-- 회원 가입  
+  		내부 회원가입 : 입력 정보 넣기
+  		외부 로그인 : ID, name 값 넣기  
+  		location 변수로 내부 , 외부 판별
+  	 -->
+  	 
+  	 <resultMap id="MemberResult" type="Member">
+		
+		<!-- column : 테이블의 컬럼명 -->
+		<!-- property : 생성한 vo 안의 필드명  // set method -->
+		
+		<id column="member_key" property="key"/> 
+		<result column="member_id" property="id"/> 
+		<result column="member_password" property="password"/> 
+		<result column="member_name" property="name"/>
+		<result column="member_nickname" property="nickname"/>
+		<result column="member_grade" property="grade"/>
+		
+	</resultMap>
+  	 
+ 	<insert id="insertMember" parameterType="Member">
+ 		insert into member values(null,#{id},#{password},#{name},#{nickname},0)
+ 	</insert>
+ 
+ 	<select id="selectAllMember" resultMap="MemberResult">
+		select * from member order by member_key
+	</select>
+  
+	<select id="selectOneMember" resultMap="MemberResult">
+		select * from member where member_id = #{id}
+	</select>
+	<update id="updateMember" parameterType="String">
+ 		update member set member_password =#{param1} where member_key =#{key}
+ 	</update>
+	<delete id="deleteMember" parameterType="Member">
+  		delete from member where member_key = #{key}
+  	</delete>
+  	<select id="checkLogin" resultMap="MemberResult">
+ 		select * from member where member_id = #{param1} and member_password = #{param2}
+ 	</select>
+ 	
+</mapper>
+
+
+
+
+
+
+
+

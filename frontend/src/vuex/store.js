@@ -1,11 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import getters from './getters'
-import actions from './actions'
 
 Vue.use(Vuex)
 
 const state = {
+  isLoggedIn: false,
   user: null,
   loading: false,
   error: null,
@@ -21,9 +20,16 @@ const state = {
 
 export default new Vuex.Store({
   state,
-  getters,
-  actions,
+  getters: {
+    user: state => state.user,
+    loading: state => state.loading,
+    error: state => state.error,
+    loginSuccess: state => state.loginSuccess
+  },
   mutations: {
+    setLogin(state, login) {
+      state.isLoggedIn = login
+    },
     setUser(state, payload) {
       state.user = payload;
     },
@@ -38,9 +44,6 @@ export default new Vuex.Store({
     },
     loginSuccess(state, payload) {
       state.loginSuccess = payload;
-    },
-    setProblem(state, payload) {
-      state.problem = payload;
     }
   }
 })

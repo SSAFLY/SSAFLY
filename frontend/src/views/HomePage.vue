@@ -48,20 +48,17 @@
      </v-flex>
    </v-layout>
  </v-container>
-   <!-- Post -->
-   <v-layout class="service-description">
-     <img src="../assets/service-description.png" style="width:100vw;">
-   </v-layout>
-   <!-- Github -->
-   <v-layout class="end-area">
-     <v-flex xs12>
-       <img src="../assets/ssafly-logo.png">
-       <h2 class="end-text">SSAFLY. Fly up to the world</h2>
-       <p class="end-text-des">SSAFY 교육생들의 미래를 진심으로 응원합니다.</p>
-       <p class="end-text-des"> #취업 성공으로 가는 지름길 #SSAFLY</p>
-     </v-flex>
-   </v-layout>
- </v-container>
+  <v-layout class="service-description">
+    <img src="../assets/service-description.png" style="width:100vw;">
+  </v-layout>
+  <v-layout class="end-area">
+    <v-flex xs12>
+      <img src="../assets/ssafly-logo.png">
+      <h2 class="end-text">SSAFLY. Fly up to the world</h2>
+      <p class="end-text-des">SSAFY 교육생들의 미래를 진심으로 응원합니다.</p>
+      <p class="end-text-des"> #취업 성공으로 가는 지름길 #SSAFLY</p>
+    </v-flex>
+  </v-layout>
 </div>
 </template>
 <style scoped>
@@ -106,15 +103,18 @@
  font-family: fantasy;
  font-size: 50px;
 }
+
 .headlineText{
  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
  margin-top: 15px;
  margin-bottom: 15px;
 }
+
 .test-detail{
  background-color: aliceblue;
  height: 70vh;
 }
+
 .description{
  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
  margin-bottom: 15px;
@@ -146,9 +146,8 @@
   font-size :1.2vw;
 
 }
-
-
 </style>
+
 <script>
 export default {
  name: 'HomePage',

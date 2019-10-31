@@ -121,9 +121,9 @@ export default {
                 },
                 {
                     num: 2,
-                    title: "오버로딩과 오버라이딩 차이는?",
-                    content: 0,
-                    answer: "오버로딩 : 메소드의 이름은 같고, 매개변수를 다르게 함으로써 여러 메소드를 만드는 것입니다.\n오버라이딩 : 부모클래스로부터 상속받은 메소드를 재정의하는 것입니다. 자식 객체에서 오버라이딩한 메소드는 호출시 오버라이딩한 메소드가 우선시 되어 호출됩니다. (동일한 리턴타입, 메소드 이름, 매개변수를 가져야합니다)",
+                    title: "다음은 이분탐색의 수도코드입니다. 빈칸에 들어갈 코드를 순서대로 작성하세요.",
+                    content: "https://github.com/SSAFLY/ssafly/blob/master/resource/problem.png?raw=true",
+                    answer: "mid - 1 / mid + 1",
                     difficulty: 0
                 },
                 {
@@ -135,9 +135,9 @@ export default {
                 },
                 {
                     num: 4,
-                    title: "다음은 이분탐색의 수도코드입니다. 빈칸에 들어갈 코드를 순서대로 작성하세요.",
-                    content: "https://github.com/SSAFLY/ssafly/blob/master/resource/problem.png?raw=true",
-                    answer: "mid - 1 / mid + 1",
+                    title: "오버로딩과 오버라이딩 차이에 대해 설명해보세요.",
+                    content: 0,
+                    answer: "오버로딩 : 메소드의 이름은 같고, 매개변수를 다르게 함으로써 여러 메소드를 만드는 것입니다.\n오버라이딩 : 부모클래스로부터 상속받은 메소드를 재정의하는 것입니다. 자식 객체에서 오버라이딩한 메소드는 호출시 오버라이딩한 메소드가 우선시 되어 호출됩니다. (동일한 리턴타입, 메소드 이름, 매개변수를 가져야합니다)",
                     difficulty: 0
                 },
                 {
@@ -195,6 +195,7 @@ export default {
             this.checked = []
         },
         onExit() {
+            this.nowPage = 1,
             this.survey = true,
             this.checked = []
         },

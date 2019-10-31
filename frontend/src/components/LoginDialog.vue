@@ -114,7 +114,8 @@
 
 <script>
 import Vue from "vue";
-import { mapGetters } from "vuex";
+import AccountService from '../services/AccountService'
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "LoginDialog",
@@ -166,39 +167,63 @@ export default {
       this.$refs.formSignup.reset();
     },
     signUp() {
+      this.$store.commit("setLoading", true);
       if (
         typeof this.id === "undefined" ||
         typeof this.name === "undefined" ||
         typeof this.password === "undefined" ||
         typeof this.passwordConfirm === "undefined"
       ) {
-        Vue.swal("Error", "ID and password is required", "error");
+        alert("ID and password is required");
       } else if (this.password !== this.passwordConfirm) {
-        Vue.swal("Error", "Password must match", "error");
+        alert("Password must match");
         this.passwordConfirm = "";
       } else {
-        this.$store.dispatch("signUserUp", {
+        const signupForm = {
           id: this.id,
           name: this.name,
+          nickname: "test",
           password: this.password,
-        });
-        this.showLogin = true;
+        }
+        const response = AccountService.signUp(signupForm);
+        response
+        .then(res => {
+          if (res.isSignIn == true) {
+            alert("회원가입 완료");
+          }
+        })
         this.closePopup();
       }
+      this.$store.commit("setLoading", false);
     },
     login() {
+      this.$store.commit("setLoading", true);
       if (
         typeof this.id === "undefined" ||
         typeof this.password === "undefined"
       ) {
-        Vue.swal("Error", "Id and password is required", "error");
+        alert("Id and password is required");
       } else {
-        this.$store.dispatch("signUserIn", {
+        const loginForm = {
           id: this.id,
-          password: this.password
-        });
+          password: this.password,
+        }
+        const response = AccountService.login(loginForm);
+        response.then(res => {
+          if (res.isLoggedIn == true) {
+            this.$store.commit('setLogin', true);
+            let user = res.user;
+            this.$store.commit('setUser', user);
+            console.log("user : " + user);
+            this.$store.commit('loginSuccess', true);
+            alert(user + "님 반갑습니다!");
+          } else {
+            alert("Id and password not matched");
+          }
+        })
         this.reset();
       }
+      this.$store.commit("setLoading", false);
     },
     closePopup() {
       this.reset();
