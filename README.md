@@ -2,11 +2,11 @@
 
 > 개발자 전공 대비 웹 서비스
 
-<img src="https://github.com/SSAFLY/ssafly/blob/master/resource/1.png">
+<img src="https://github.com/SSAFLY/ssafly/blob/master/resource/1.PNG?raw=true">
 
-<img src="https://github.com/SSAFLY/ssafly/blob/master/resource/2.png">
+<img src="https://github.com/SSAFLY/ssafly/blob/master/resource/2.PNG?raw=true">
 
-<img src="https://github.com/SSAFLY/ssafly/blob/master/resource/3.png">
+<img src="https://github.com/SSAFLY/ssafly/blob/master/resource/3.PNG?raw=true">
 
 <br>
 
