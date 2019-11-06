@@ -20,7 +20,7 @@
 		<!-- property : 생성한 vo 안의 필드명  // set method -->
 		
 		<id column="problem_key" property="key"/> 
-		<result column="problem_problem" property="problem"/> 
+		<result column="problem_problem" property="title"/> 
 		<result column="problem_answer" property="answer"/> 
 		<result column="problem_difficulty" property="difficulty"/>
 		<result column="problem_type" property="type"/>
@@ -29,7 +29,7 @@
 	</resultMap>
   	 
  	<insert id="insertProblem" parameterType="Problem">
- 		insert into problem values(null,#{problem},#{answer},#{difficulty},#{type},#{image},8)
+ 		insert into problem values(null,#{title},#{answer},#{difficulty},#{type},#{image},8)
  	</insert>
  
  	<select id="selectAllProblem" resultMap="ProblemResult">
@@ -39,9 +39,9 @@
 	<select id="selectOneProblem" resultMap="ProblemResult">
 		select * from problem where problem_key = #{key}
 	</select>
-<!-- 	<update id="updateProblem" parameterType="String"> -->
-<!--  		update problem set problem_problem =#{param1} where problem_key =#{key} -->
-<!--  	</update> -->
+	<update id="updateProblem" parameterType="String">
+ 		update problem set problem_answer =#{param2} where problem_key =#{param1}
+ 	</update>
 	<delete id="deleteProblem" parameterType="Problem">
   		delete from problem where problem_key = #{key}
   	</delete>

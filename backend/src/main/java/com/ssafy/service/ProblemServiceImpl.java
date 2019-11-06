@@ -34,14 +34,16 @@ public class ProblemServiceImpl implements ProblemService {
 		return dao.selectOneProblem(id);
 	}
 
-	@Override
-	public void updateProblem(String id) {
-		dao.updateProblem(id);
-	}
 
 	@Override
 	public void deleteProblem(String id) {
 		dao.deleteProblem(id);
+	}
+
+	@Override
+	public void updateProblem(String id, String contents) {
+		dao.updateProblem(id, contents);
+		
 	}
 
 	

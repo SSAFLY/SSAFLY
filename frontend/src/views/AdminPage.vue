@@ -1,6 +1,8 @@
 <template>
     <v-container class="workbook">
         <v-row style="height: 100%">
+            <v-btn @click="change" v-if="!now">문제 추가</v-btn>
+            <v-btn @click="change" v-if="now">목록 보기</v-btn>
             <v-col cols="12">
                 <v-container v-if="now">
                     <v-form ref="formProblem">
@@ -31,12 +33,12 @@
                 </v-container>
                 <v-container v-if="!now" pa-0 fluid grid-list-md>
                     <v-layout align wrap>
-                        <v-flex v-for="problem in problems" v-bind:key="problem.problemKey" xs12 md4 sm6>
+                        <v-flex v-for="problem in problems" v-bind:key="problem.key" xs12 md4 sm6>
                             <v-card class="card-area">
-                                <v-card-title style="font-size:13px;">{{problem.problem}}</v-card-title>
+                                <v-card-title style="font-size:13px;">{{problem.title}}</v-card-title>
                                 <v-card-actions>
-                                    <v-btn text @click="deleteWorkbook(problem.problemKey)">DELETE</v-btn>
-                                    <v-btn text @click="openModal(problem.problem, problem.solution, problem.answer, problem.problemKey)">UPDATE</v-btn>
+                                    <v-btn text @click="deleteProblem(problem.key)">DELETE</v-btn>
+                                    <v-btn text @click="openModal(problem.title, problem.answer, problem.key)">UPDATE</v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-flex>
@@ -55,12 +57,9 @@
                     </v-card-title>
                     <br><br>
                     <v-card-text>
-                        <v-textarea rows="10" v-model="pAnswer" label="Answer"></v-textarea>
+                        <v-textarea rows="10" v-model="pAnswer" label="Solution"></v-textarea>
                     </v-card-text>
-                    <br><br>
-                    <v-card-text>
-                        <v-textarea rows="10" v-model="pSolution" label="Solution" readonly="readonly" disabled></v-textarea>
-                    </v-card-text>
+
                     <v-divider></v-divider>
 
                     <v-card-actions>
@@ -75,7 +74,7 @@
                     <v-btn
                         color="primary"
                         text
-                        @click="updateWorkbook"
+                        @click="modifySolution"
                     >
                         수정 완료
                     </v-btn>
@@ -87,7 +86,6 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
 import AccountService from '../services/AccountService';
 
 export default {
@@ -103,16 +101,12 @@ export default {
             mod: false,
             content: '',
             pTitle: "",
-            pSolution: "",
             pAnswer: "",
             pKey: 0,
         }
     },
-    computed: {
-        ...mapState(["user"])
-    },
     mounted() {
-        this.getAllWorkbookByID(this.user)
+        this.getAllProblem()
     },
     methods: {
         parents(dialog) {
@@ -124,42 +118,76 @@ export default {
         reset() {
             this.$refs.formProblem.reset();
         },
-        getAllWorkbookByID(id) {
-            const response = AccountService.getAllWorkbookByID(id);
+        add() {
+            if (
+                this.title == "" ||
+                this.answer == ""
+            ) {
+                alert("문제와 정답을 입력해주세요");
+            }
+            else {
+                const problemForm = {
+                    title: this.title,
+                    answer: this.answer,
+                    difficulty: 0,
+                    type: 0,
+                    image: "",
+                }
+                const response = AccountService.addProblem(problemForm);
+                response.then(res => {
+                if (res.success == true) {
+                    alert("등록되었습니다!");
+                    this.getAllProblem()
+                } else {
+                    alert("등록에 실패했습니다");
+                }
+                })
+                this.change();
+                this.reset();
+            }
+        },
+        getAllProblem() {
+            const response = AccountService.getAllProblem();
             response.then(res => {
                 this.problems = res
             })
         },
-        updateWorkbook() {
+        modifySolution() {
             this.mod = false
             const contents = {
                 key: this.pKey,
                 content: this.pAnswer
             }
-            const response = AccountService.updateWorkbook(this.user, contents);
+            const response = AccountService.updateProblem(contents);
             response.then(res => {
-                alert("수정 완료!")
-                this.getAllWorkbookByID(this.user)
+                if (res.success == true) {
+                    alert("수정 완료!")
+                    this.getAllProblem()
+                }
+                else {
+                    alert("수정하지 못했습니다")
+                }
             })
         },
-        deleteWorkbook(pKey){
-            const response = AccountService.deleteWorkbook(this.user,pKey);
+        deleteProblem(key){
+            const response = AccountService.deleteProblem(key);
             response.then(res=> {
-                alert("삭제 완료!")
-                this.getAllWorkbookByID(this.user)
+                //console.log("res : " + res.success)
+                if (res.success == true) {
+                    alert("삭제 완료!")
+                    this.getAllProblem()
+                }
             })
         },
-        openModal(pTitle, pSolution,pAnswer, pKey) {
+        openModal(pTitle, pAnswer, pKey) {
             this.mod = true
             this.pTitle = pTitle
-            this.pSolution = pSolution
             this.pAnswer = pAnswer
             this.pKey = pKey
         },
         closeModal() {
             this.mod = false
             this.pTitle = ""
-            this.pSolution = ""
             this.pAnswer = ""
             this.pKey = 0
         }

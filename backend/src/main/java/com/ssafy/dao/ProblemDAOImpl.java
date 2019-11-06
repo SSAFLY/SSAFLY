@@ -32,14 +32,16 @@ public class ProblemDAOImpl implements ProblemDAO {
 		return mapper.selectOneProblem(id);
 	}
 
-	@Override
-	public void updateProblem(String id) {
-		mapper.updateProblem(id);
-	}
 
 	@Override
 	public void deleteProblem(String id) {
 		mapper.deleteProblem(id);
+	}
+
+	@Override
+	public void updateProblem(String id, String contents) {
+		mapper.updateProblem(id, contents);
+		
 	}
 
 	

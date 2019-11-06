@@ -48,7 +48,33 @@
   	<select id="checkLogin" resultMap="MemberResult">
  		select * from member where member_id = #{param1} and member_password = #{param2}
  	</select>
- 	
+ 	<delete id="deleteAnswer" parameterType="String">
+  		delete from member_answer where member_key = (select member_key
+													   from member
+			                                           where member_id = #{param1}) and problem_key = #{param2}
+  	</delete>
+  	<insert id="insertAnswer" parameterType="String">
+  		insert into member_answer values(null,(select member_key from member where member_id = #{param1}),#{param2},#{param3})
+  	</insert>
+  	
+  	<select id="selectAnswer" resultType="Answer">
+  		  	select p.problem_key "problemKey", p.problem_problem "problem", p.problem_answer "solution", ms.member_answer "answer"
+			from problem p
+			inner join member_answer ms
+			on p.problem_key = ms.problem_key
+			where p.problem_key in (select problem_key 
+								   from member_answer ms
+			                       where member_key = (select member_key
+													   from member
+			                                           where member_id = #{param1}));
+  	</select>
+  	<update id="updateAnswer" parameterType="String">
+ 		update member_answer set member_answer = #{param3} where member_key = (select member_key
+													 						  from member
+			                                      					  	     where member_id = #{param1}) and problem_key = #{param2}
+ 	</update>
+
+  	
 </mapper>
 
 

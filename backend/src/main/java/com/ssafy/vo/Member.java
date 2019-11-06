@@ -1,6 +1,9 @@
 package com.ssafy.vo;
 
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,4 +17,5 @@ public class Member {
 	private String name;
 	private String nickname;
 	private String grade;
+	private ArrayList<Answer> answer;
 }

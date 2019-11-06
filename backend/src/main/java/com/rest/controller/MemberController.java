@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.service.MemberService;
+import com.ssafy.vo.Answer;
 import com.ssafy.vo.Member;
-
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
 public class MemberController {
@@ -57,4 +57,36 @@ public class MemberController {
 		map.put("mid", member.getId());
 		return map;
 	}
+	
+	@RequestMapping(value = "/answer/{id}", method = RequestMethod.GET, produces = { "application/json;charset=utf-8" })
+	public List<Answer> selectAnswer(@PathVariable("id") String id) {
+		return mService.selectAnswer(id);
+	}
+	
+	@RequestMapping(value = "/answer/{id}", method = RequestMethod.POST, produces = { "application/json;charset=utf-8" })
+	public Map insertAnswer(@PathVariable("id") String id, @RequestBody Answer answer) {
+		HashMap<String, String> map = new HashMap<String, String>();
+			mService.deleteAnswer(id, answer.getProblemKey());
+			mService.insertAnswer(id, answer.getProblemKey(), answer.getAnswer());
+			map.put("success", "true");
+		return map;
+	}
+	
+	@RequestMapping(value = "/answer/{id}/{key}", method = RequestMethod.DELETE, produces = {"application/json;charset=utf-8" })
+	public Map deleteAnswer(@PathVariable("id") String id,@PathVariable("key") String key) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		mService.deleteAnswer(id,key);
+		map.put("success", "true");
+		return map;
+	
+	}
+	
+	@RequestMapping(value = "/answer/{id}/{key}", method = RequestMethod.PUT, produces= {"application/json;charset=utf-8"})
+	public Map updateProblem(@PathVariable("id") String id,@PathVariable("key") String key, @RequestBody HashMap<String,String> contents) {
+		mService.updateAnswer(id,key,contents.get("content"));
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("success", "true");
+		return map;
+	}
+	
 }

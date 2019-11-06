@@ -15,7 +15,8 @@ const state = {
     answer: "",
     difficulty: 0,
     type: 0
-  }
+  },
+  grade: 0,
 }
 
 export default new Vuex.Store({
@@ -24,7 +25,8 @@ export default new Vuex.Store({
     user: state => state.user,
     loading: state => state.loading,
     error: state => state.error,
-    loginSuccess: state => state.loginSuccess
+    loginSuccess: state => state.loginSuccess,
+    grade: state => state.grade,
   },
   mutations: {
     setLogin(state, login) {
@@ -44,6 +46,9 @@ export default new Vuex.Store({
     },
     loginSuccess(state, payload) {
       state.loginSuccess = payload;
+    },
+    setGrade(state, payload) {
+      state.grade = payload;
     }
   }
 })

@@ -19,6 +19,7 @@
           <router-link :to="{ name: 'home' }" class="nav-item nav-link h4"></router-link>
           <router-link :to="{ name: 'test' }" class="nav-item nav-link h4">모의시험</router-link>
           <router-link :to="{ name: 'workbook' }" class="nav-item nav-link h4">학습장</router-link>
+          <router-link :to="{ name: 'admin' }" v-if="grade==1" class="nav-item nav-link h4">관리자</router-link>
           <div v-if="!user" class="nav-item nav-link h4" @click.stop="dialog = true">로그인</div>
           <div v-if="user" v-on:click="signOut" class="nav-item nav-link h4">로그아웃</div>
         </div>
@@ -45,7 +46,12 @@ props: {
   }
 },
 computed: {
-  ...mapState(["user"])
+  ...mapState(["user", "grade"])
+},
+mounted(){
+  if(sessionStorage.getItem("user") !== null){
+    this.$store.commit("setUser", sessionStorage.getItem("user"))
+  }
 },
 methods: {
   scrollToTop() {
@@ -59,6 +65,9 @@ methods: {
     this.$store.commit("setUser", null);
     this.$store.commit("setLogin", false);
     this.$store.commit("loginSuccess", false);
+    this.$store.commit("setGrade", 0);
+    sessionStorage.removeItem("user");
+    this.$router.go('/');
   }
 },
 data() {

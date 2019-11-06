@@ -9,6 +9,6 @@ public interface ProblemDAO {
 	public List<Problem> selectAllProblem();
 	public List<Problem> selectSolveingProblem(String type);
 	public Problem selectOneProblem(String id);
-	public void updateProblem(String id);
+	public void updateProblem(String id, String contents);
 	public void deleteProblem(String id);
 }

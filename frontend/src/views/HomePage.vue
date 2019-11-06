@@ -30,7 +30,7 @@
          내가 원하는 분야 시험보기
        </h4>
        <p class="description">
-         기초 IT 지식, 알고리즘, 자료구조를 기본으로 자기만의 시험지를 만듭니다. 특정 도메인을 선택하여 시험을 볼 수 도 있습니다.
+         기초 IT 지식, 알고리즘, 자료구조를 기본으로 자기만의 시험지를 만들어 시험을 볼 수 있습니다.
        </p>
      </v-flex>
       <v-flex xs12 class="introduciton-box">
@@ -60,6 +60,7 @@
     </v-flex>
   </v-layout>
 </div>
+
 </template>
 <style scoped>
 @import url('https://fonts.googleapis.com/css?family=Caveat&display=swap');

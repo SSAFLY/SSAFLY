@@ -3,7 +3,18 @@ import Router from 'vue-router'
 import HomePage from './views/HomePage.vue'
 import TestPage from './views/TestPage.vue'
 import WorkbookPage from './views/WorkbookPage.vue'
+import AdminPage from './views/AdminPage.vue'
+import store from './vuex/store'
+
 Vue.use(Router)
+
+const requireAuth = () => (to, from, next) => {
+  if(store.state.user !== null || sessionStorage.getItem("user") !== null){
+    return next();
+  }
+  alert("로그인을 먼저 해주세요")
+  next('/')
+}
 
 export default new Router({
   mode: 'history',
@@ -21,12 +32,20 @@ export default new Router({
     {
       path: '/test',
       name: 'test',
-      component: TestPage
+      component: TestPage,
+      beforeEnter: requireAuth()
     },
     {
       path: '/workbook',
       name: 'workbook',
-      component: WorkbookPage
+      component: WorkbookPage,
+      beforeEnter: requireAuth()
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: AdminPage,
+      beforeEnter: requireAuth()
     }
   ]
 })

@@ -1,4 +1,17 @@
-## SSAFLY 
+# SSAFLY 
+
+> 개발자 전공 대비 웹 서비스
+
+<img src="https://github.com/SSAFLY/ssafly/blob/master/resource/1.png">
+
+<img src="https://github.com/SSAFLY/ssafly/blob/master/resource/2.png">
+
+<img src="https://github.com/SSAFLY/ssafly/blob/master/resource/3.png">
+
+<br>
+
+<br>
+
 #### Description
 - IT 개발자의 기술 면접과 IT 필기 시험을 대비할 수 있는 사이트
 - OPIC 테스트 방식으로 진행되며, 주어진 문제에서 말하면 좋은 키워드와 모범 답안을 제공해줌으로서 가이드라인을 제시해주는 서비스

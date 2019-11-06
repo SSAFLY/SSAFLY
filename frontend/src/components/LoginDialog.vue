@@ -214,8 +214,9 @@ export default {
             this.$store.commit('setLogin', true);
             let user = res.user;
             this.$store.commit('setUser', user);
-            console.log("user : " + user);
+            this.$store.commit('setGrade', res.grade);
             this.$store.commit('loginSuccess', true);
+            sessionStorage.setItem("user", user);
             alert(user + "님 반갑습니다!");
           } else {
             alert("Id and password not matched");

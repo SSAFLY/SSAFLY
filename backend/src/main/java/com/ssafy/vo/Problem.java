@@ -12,10 +12,12 @@ import lombok.ToString;
 @Getter @Setter @ToString
 public class Problem {
 	private String key;
-	private String problem;
+	private String title;
 	private String answer;
 	private String difficulty;
 	private String type;
 	private String image;
 	private ArrayList<String> keywords;
+	private int num;
+	private String userAnswer;
 }
